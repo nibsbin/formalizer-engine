@@ -55,6 +55,10 @@ End user:
 #form(first_name: "John", agree_terms: true)
 ```
 
+## Schema
+
+See ./FIELDS_SCHEMA.md for specs and ./example/FIELDS.json for example.
+
 ## Testing
 
 Use the `uv` project manager to bootstrap a python pytest environment in tests/. Write mixed .py and .typ tests with your discretion to robustly validate typst-formalizer package functionality.
