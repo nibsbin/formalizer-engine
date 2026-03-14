@@ -125,7 +125,7 @@
       #place(top + left, image(bg, width: pw, height: ph, fit: "stretch"))
 
       // Field overlays
-      #for field in page-fields {
+      #for field in page-fields.filter(f => lower(f.type) != "button") {
         let x  = field.bbox.at(0) * 1pt
         let y  = field.bbox.at(1) * 1pt
         let w  = (field.bbox.at(2) - field.bbox.at(0)) * 1pt
