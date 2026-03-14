@@ -125,7 +125,7 @@
       #place(top + left, image(bg, width: pw, height: ph, fit: "stretch"))
 
       // Field overlays
-      #for field in page-fields.filter(f => lower(f.type) != "button") {
+      #for field in page-fields.filter(f => ("text", "checkbox", "radio", "combobox", "listbox").contains(lower(f.type))) {
         let x  = field.bbox.at(0) * 1pt
         let y  = field.bbox.at(1) * 1pt
         let w  = (field.bbox.at(2) - field.bbox.at(0)) * 1pt
@@ -148,6 +148,9 @@
           dy: y,
           render-field(field-type, val, w, h, field),
         )
+
+        // Zero-width fence to break PDF viewer text-selection grouping
+        place(top + left, dx: x, dy: y, text(size: 0.001pt, "\u{FEFF}"))
       }
     ]
   }
