@@ -54,3 +54,7 @@ End user:
 #import "copied-form.typ": form
 #form(first_name: "John", agree_terms: true)
 ```
+
+## Testing
+
+Use the `uv` project manager to bootstrap a python pytest environment in tests/. Write mixed .py and .typ tests with your discretion to robustly validate typst-formalizer package functionality.
