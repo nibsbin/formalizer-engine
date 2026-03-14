@@ -6,6 +6,7 @@ __pycache__/
 
 # Typst build outputs
 *.pdf
+!/example/**
 
 # uv
 .python-version
