@@ -11,26 +11,6 @@ A publishable Typst package that renders pixel-perfect PDF form replicas from a 
 | **Generated `copied-form.typ`** | Named-parameter function wrapping the package |
 | **End user** | Calls `#form(first_name: "John", agree_terms: true)` |
 
-## Schema: FIELDS.json
-
-Output of PyMuPDF extraction. One entry per field:
-
-```json
-{
-  "pages": [{ "width": 792, "height": 612 }],
-  "fields": [
-    { "name": "first_name",  "type": "text",      "bbox": [x0,y0,x1,y1], "page": 1 },
-    { "name": "agree_terms", "type": "checkbox",  "bbox": [...],          "page": 1 },
-    { "name": "choice",      "type": "radio",     "bbox": [...],          "page": 1 },
-    { "name": "gender",      "type": "combobox",  "bbox": [...],          "page": 1, "options": [["Male","M"],["Female","F"]] },
-    { "name": "items",       "type": "listbox",   "bbox": [...],          "page": 1, "options": [["Aaa","a"],["Bbb","b"]] }
-  ]
-}
-```
-
-In-scope field types: `text`, `checkbox`, `radio`, `combobox`, `listbox`.
-
-`options` is a list of `[export_value, display_label]` pairs (PyMuPDF native format), present on `combobox` and `listbox` only.
 
 ## Package API
 
