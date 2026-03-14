@@ -17,16 +17,20 @@ Output of PyMuPDF extraction. One entry per field:
 
 ```json
 {
-  "pages": [{ "width": 612, "height": 792 }],
+  "pages": [{ "width": 792, "height": 612 }],
   "fields": [
-    { "name": "first_name", "type": "text",     "bbox": [x0,y0,x1,y1], "page": 1, "label": "First Name" },
-    { "name": "agree_terms","type": "checkbox",  "bbox": [...],         "page": 1 },
-    { "name": "gender",     "type": "select",    "bbox": [...],         "page": 1, "options": ["Male","Female","Other"] }
+    { "name": "first_name",  "type": "text",      "bbox": [x0,y0,x1,y1], "page": 1 },
+    { "name": "agree_terms", "type": "checkbox",  "bbox": [...],          "page": 1 },
+    { "name": "choice",      "type": "radio",     "bbox": [...],          "page": 1 },
+    { "name": "gender",      "type": "combobox",  "bbox": [...],          "page": 1, "options": [["Male","M"],["Female","F"]] },
+    { "name": "items",       "type": "listbox",   "bbox": [...],          "page": 1, "options": [["Aaa","a"],["Bbb","b"]] }
   ]
 }
 ```
 
-Field types: `text`, `checkbox`, `select`, `radio`, `signature`.
+In-scope field types: `text`, `checkbox`, `radio`, `combobox`, `listbox`.
+
+`options` is a list of `[export_value, display_label]` pairs (PyMuPDF native format), present on `combobox` and `listbox` only.
 
 ## Package API
 
@@ -55,11 +59,13 @@ Orchestration codegens this once from `FIELDS.json`. End users edit it to fill t
 #let form(
   first_name:  "",      // text
   agree_terms: false,   // checkbox
-  gender:      "Male",  // select [Male, Female, Other]
+  choice:      none,    // radio
+  gender:      "Male",  // combobox [Male, Female]
+  items:       "Aaa",   // listbox [Aaa, Bbb]
 ) = render-form(
   schema: json("FIELDS.json"),
-  backgrounds: ("page1.png", "page2.png"),
-  values: (first_name: first_name, agree_terms: agree_terms, gender: gender),
+  backgrounds: ("page1.png",),
+  values: (first_name: first_name, agree_terms: agree_terms, choice: choice, gender: gender, items: items),
 )
 ```
 
