@@ -15,19 +15,20 @@ A publishable Typst package that renders pixel-perfect PDF form replicas from a 
 ## Package API
 
 ```typst
-#let render-form(schema, backgrounds, values: (:)) = { ... }
+#let render-form(schema: none, backgrounds: (), values: (:)) = { ... }
 ```
 
-- `schema` — result of `json("FIELDS.json")`
-- `backgrounds` — list of PNG paths, one per page
+- `schema` — result of `json("FIELDS.json")` (required named parameter)
+- `backgrounds` — list of PNG paths, one per page (required named parameter)
 - `values` — dict of field name → value (omit to render blank)
 
 ## Rendering
 
 1. Group fields by page
-2. Per page: fixed-size `block` → `image(bg, fit: "stretch")` → `place(dx, dy)` per field
+2. Per page: `page(width, height, margin: 0pt)` → `place(top+left, image(bg, fit: "stretch"))` → `place(dx, dy)` per field
 3. Coordinates: PyMuPDF bbox is top-left origin, same as Typst — multiply by `1pt`
 4. Field widgets are transparent overlays (no chrome); PNG provides visual styling
+5. A zero-width no-break space (`U+FEFF`) fence is placed at each field origin to prevent PDF viewer text-selection grouping across fields
 
 ## Generated `copied-form.typ`
 

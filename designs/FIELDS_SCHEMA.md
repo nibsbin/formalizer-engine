@@ -41,6 +41,7 @@ Contract between the orchestration layer (PyMuPDF extraction) and the Typst form
 | `bbox` | `[float, float, float, float]` | `[x0, y0, x1, y1]` in points, top-left origin |
 | `page` | `int` | 1-indexed page number |
 | `options` | `[[string, string], ...]` \| `null` | `[export_value, display_label]` pairs; `combobox` and `listbox` only |
+| `export_value` | `string` \| omitted | For `radio` fields: the export value of this specific button. When present, selection is matched by comparing this value against the group value. When absent, the 0-based index within the group (stringified) is used. |
 
 ## Field Types
 
@@ -48,7 +49,7 @@ Contract between the orchestration layer (PyMuPDF extraction) and the Typst form
 |---|---|---|
 | `text` | Single or multiline text input | `null` |
 | `checkbox` | Boolean toggle | `null` |
-| `radio` | One-of-many selection (one `Field` entry per button) | `null` |
+| `radio` | One-of-many selection (one `Field` entry per button); may carry `export_value` | `null` |
 | `combobox` | Dropdown with fixed options | required |
 | `listbox` | Scrollable list with fixed options | required |
 
